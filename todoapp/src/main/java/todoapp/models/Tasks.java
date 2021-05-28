@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Tasks {
@@ -11,7 +12,8 @@ public class Tasks {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private int userId;
+	@ManyToOne
+	private User user;
 	private String task;
 	private boolean isCompleted;
 	public int getId() {
@@ -20,11 +22,11 @@ public class Tasks {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public String getTask() {
 		return task;
@@ -38,8 +40,17 @@ public class Tasks {
 	public void setCompleted(boolean isCompleted) {
 		this.isCompleted = isCompleted;
 	}
-	@Override
-	public String toString() {
-		return "Tasks [id=" + id + ", userId=" + userId + ", task=" + task + ", isCompleted=" + isCompleted + "]";
+	public Tasks(int id, User user, String task, boolean isCompleted) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.task = task;
+		this.isCompleted = isCompleted;
 	}
+	public Tasks() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 }

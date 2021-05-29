@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,15 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String email;
 	private String password;
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Tasks> tasks;
 	
+	public List<Tasks> getTasks() {
+		return tasks;
+	}
+	public void setTasks(List<Tasks> tasks) {
+		this.tasks = tasks;
+	}
 	public int getId() {
 		return id;
 	}
@@ -47,6 +56,7 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + "]";
+		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", tasks="
+				+ tasks + "]";
 	}
 }

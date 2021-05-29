@@ -11,7 +11,7 @@
 </head>
 <body>
  <div class="row">
-    <form class="col s12" action="login" method="post">
+    <form class="col s12" action="/todoapp/auth/login" method="post">
     <div class="row">
         <div class="input-field col s12">
           <input id="email" type="email" class="validate" name="email">

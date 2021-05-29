@@ -65,8 +65,7 @@ public class TaskController {
 	
 	@RequestMapping(path="/taskcomplete")
 	public RedirectView updateTask(@RequestParam String id, @RequestParam String user_id) {
-		Tasks task = this.taskService.getTask(Integer.parseInt(id));
-		this.taskService.updateTask(task); 
+		this.taskService.taskComplete(Integer.parseInt(id));
 		RedirectView view = new RedirectView("/todoapp/tasks?user_id="+user_id);
 		return view;
 	}

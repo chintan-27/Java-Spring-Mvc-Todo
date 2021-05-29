@@ -2,15 +2,14 @@ package todoapp.dao;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import todoapp.models.Tasks;
 
-@Entity
+@Repository
 public class TaskDao {
 	
 	@Autowired
@@ -35,6 +34,13 @@ public class TaskDao {
 		this.hibernateTemplate.delete(task);
 	}
 	
+	@SuppressWarnings("deprecation")
+	@Transactional
+	public void taskComplete(int id) {
+		String query = "update Tasks set isCompleted = ? where id = ?";
+		Object[] queryparam = {true, id};
+		this.hibernateTemplate.bulkUpdate(query, queryparam);
+	}
 	public Tasks getTask(int id) {
 		Tasks task = (Tasks) this.hibernateTemplate.load(Tasks.class, id);
 		return task;

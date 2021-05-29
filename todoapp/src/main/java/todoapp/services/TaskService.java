@@ -31,7 +31,12 @@ public class TaskService {
 		this.taskDao.addOrUpdateTask(task);
 	}
 	
+	public void taskComplete(int id) {
+		this.taskDao.taskComplete(id);
+	}
+	
 	public Tasks getTask(int id) {
-		return this.taskDao.getTask(id);
+		Tasks task = this.taskDao.getTask(id);
+		return task;
 	}
 }

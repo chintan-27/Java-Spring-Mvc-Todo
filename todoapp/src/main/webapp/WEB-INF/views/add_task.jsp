@@ -15,19 +15,25 @@
 <title>Add Task</title>
 </head>
 	<body>
-		<form action="handletask" method="POST">
+	<br>
+		<div class = "container">
+		<div class="text-center">
+			<h1>ADD TASKS</h1>
+		</div>
+		<form action="handletask?user_id=${user_id }" method="POST">
 		<div class="center">
 		  <div class="form-group">
 			    <label for="task">Task</label>
-			    <input type="text" class="form-control" name="task" placeholder="Enter the task" style="width:50%;">
+			    <input type="text" class="form-control" name="task" placeholder="Enter the task">
 		  </div>
 		 </div>
-		  <input type="hidden" name="user" value=1 />
-		  <input type="hidden" name="isCompleted" value="false" /> 
 		  <div class="text-center">
-		  <button type="submit" class="btn btn-primary text-center">Submit</button>
+		  <div class = "container text-center">
+		  <button class="btn btn-success text-center">Submit</button>
+		  </div>
 		  </div>
 		</form>
+		</div>
 	
 	</body>
 </html>

@@ -18,6 +18,7 @@
  	<context:annotation-config />
  	<tx:annotation-driven/>
  	<context:component-scan base-package="todoapp"></context:component-scan>
+ 	
  	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" name="viewResolver">
  		<property name="prefix" value="/WEB-INF/views/" />
  		<property name="suffix" value=".jsp" />
@@ -27,7 +28,7 @@
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/todo?useSSL=false" />
 		<property name="username" value="root" />
-		<property name="password" value="bhavya12" />
+		<property name="password" value="Chintan12345" />
 	</bean> 
  
  	<bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"  name="factory">
@@ -53,10 +54,15 @@
  
  	<bean class="org.springframework.orm.hibernate5.HibernateTemplate" name="hibernateTemplate">
  		<property name="sessionFactory" ref="factory" />
+ 		
  	</bean>
 	
 	<bean class="org.springframework.orm.hibernate5.HibernateTransactionManager" name="transactionManager">
 		<property name="sessionFactory" ref="factory" />
+	</bean>
+	
+	<bean class="todoapp.dao.TaskDao" name="taskDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
 	</bean>
  
  

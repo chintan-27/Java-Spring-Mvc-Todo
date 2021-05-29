@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 import todoapp.models.User;
 import todoapp.services.AuthService;
@@ -24,13 +25,16 @@ public class AuthController {
 	}
 	
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public String handleLogin(@RequestParam("email") String email, @RequestParam("password") String password, Model m) {
-		int id = this.authService.login(email, password);
+	public RedirectView handleLogin(@RequestParam("email") String email, @RequestParam("password") String password, Model m) {
+		Integer id = this.authService.login(email, password);
+		RedirectView redirectView = new RedirectView();
 		if(id == 0) {
 			m.addAttribute("message", "Invalid Credentials");
-			return "login";
+			redirectView.setUrl("/todoapp/auth/login");
+			return redirectView;
 		}else {
-			return "tasks";
+			redirectView.setUrl("/todoapp/tasks?user_id=" + id.toString());
+			return redirectView;
 		}
 		
 	}
@@ -41,8 +45,9 @@ public class AuthController {
 	}
 
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
-	public String handleRegister(@ModelAttribute("user") User user, Model model) {
+	public RedirectView handleRegister(@ModelAttribute("user") User user, Model model) {
 		this.authService.register(user);
-		return "tasks";
+		RedirectView redirectView = new RedirectView("/todoapp/auth/login/");
+		return redirectView;
 	}
 }

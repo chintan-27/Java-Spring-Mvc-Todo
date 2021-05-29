@@ -20,17 +20,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String email;
 	private String password;
-	@OneToMany
-	private List<Tasks> tasks = new ArrayList<Tasks>();
 	
-	
-	
-	public List<Tasks> getTasks() {
-		return tasks;
-	}
-	public void setTasks(List<Tasks> tasks) {
-		this.tasks = tasks;
-	}
 	public int getId() {
 		return id;
 	}
@@ -55,11 +45,8 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", tasks="
-				+ tasks + "]";
+		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + "]";
 	}
-
 }

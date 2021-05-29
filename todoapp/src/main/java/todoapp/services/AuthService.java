@@ -20,4 +20,8 @@ public class AuthService {
 		int id = userDao.login(email, password);
 		return id;
 	}
+	
+	public User getUser(int id) {
+		return userDao.getUser(id);
+	}
 }

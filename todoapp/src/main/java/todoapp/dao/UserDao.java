@@ -23,7 +23,7 @@ public class UserDao {
 	
 
 	public int login(String email, String password) {
-		List<User> users = (List<User>)this.hibernateTemplate.find("from User where email = ?",email);
+		List<User> users = (List<User>) this.hibernateTemplate.find("from User where email = ?",email);
 		if(users.size() > 0) {
 			User user = users.get(0);
 			String pass = user.getPassword();

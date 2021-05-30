@@ -20,53 +20,59 @@ import todoapp.services.TaskService;
 @Controller
 @RequestMapping("/tasks")
 public class TaskController {
-	
+
 	@Autowired
 	private AuthService authService;
-	
+
 	@Autowired
 	private TaskService taskService;
-	
+
 	@RequestMapping(path = "")
 	public String tasks(@RequestParam String user_id, Model model) {
+		System.out.println("Reached Controller");
 		int id = Integer.parseInt(user_id);
-		List<Tasks> tasks = this.taskService.getTasks(id); 
+		List<Tasks> tasks = this.taskService.getTasks(id);
+		User user = this.authService.getUser(id);
+		System.out.println("User is " + user);
 		model.addAttribute("user_id", id);
-		model.addAttribute("tasks",tasks);
+		model.addAttribute("user",user); 
+		model.addAttribute("tasks", tasks);
 		return "tasks";
 	}
-	
+
 	@RequestMapping(path = "/add_task")
 	public String addtask(@RequestParam String user_id, Model model) {
 		int id = Integer.parseInt(user_id);
 		model.addAttribute("user_id", id);
 		return "add_task";
 	}
+
 	@RequestMapping(path = "/handletask", method = RequestMethod.POST)
-	public RedirectView handleTask(@RequestParam("task") String task, @RequestParam String user_id, HttpServletRequest s) {
+	public RedirectView handleTask(@RequestParam("task") String task, @RequestParam String user_id,
+			HttpServletRequest s) {
 		int id = Integer.parseInt(user_id);
-		User user = authService.getUser(id); 
+		User user = authService.getUser(id);
 		Tasks task1 = new Tasks();
 		task1.setUser(user);
 		task1.setCompleted(false);
 		task1.setTask(task);
 		taskService.addTask(task1);
 		RedirectView view = new RedirectView();
-		view.setUrl("/todoapp/tasks?user_id="+user_id);
+		view.setUrl("/todoapp/tasks?user_id=" + user_id);
 		return view;
 	}
-	
-	@RequestMapping(path="/deletetask")
+
+	@RequestMapping(path = "/deletetask")
 	public RedirectView deleteTask(@RequestParam String id, @RequestParam String user_id) {
 		this.taskService.deleteTask(Integer.parseInt(id));
-		RedirectView view = new RedirectView("/todoapp/tasks?user_id="+user_id);
+		RedirectView view = new RedirectView("/todoapp/tasks?user_id=" + user_id);
 		return view;
 	}
-	
-	@RequestMapping(path="/taskcomplete")
+
+	@RequestMapping(path = "/taskcomplete")
 	public RedirectView updateTask(@RequestParam String id, @RequestParam String user_id) {
 		this.taskService.taskComplete(Integer.parseInt(id));
-		RedirectView view = new RedirectView("/todoapp/tasks?user_id="+user_id);
+		RedirectView view = new RedirectView("/todoapp/tasks?user_id=" + user_id);
 		return view;
 	}
 }

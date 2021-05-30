@@ -35,7 +35,8 @@ tr:nth-child(even) {
 <body>
 <div class="text-center">
 <h1>TASKS </h1>
-<h1> USER ID: ${user_id }</h1>
+<h3> USER ID: ${user_id }</h3>
+<h3>Welcome, ${user.username } </h3>
 </div>
 
 <br>

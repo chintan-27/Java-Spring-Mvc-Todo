@@ -80,8 +80,9 @@ tr:nth-child(even) {
 			<td class="text-center"> ${task.getTask() } </td>
 			<td class="text-center"> ${task.isCompleted() } </td>
 			<td class="text-center"> <a href="/todoapp/tasks/deletetask?user_id=${task.getUser().getId()}&id=${task.getId() }" style="text-decoration: underline;">DELETE</a>
-			<a href="/todoapp/tasks/taskcomplete?user_id=${task.getUser().getId() }&id=${task.getId()}" style="text-decoration: underline;">COMPLETED</a>
-	
+			<c:if test="${!task.isCompleted()}">
+			<a href="/todoapp/tasks/taskcomplete?user_id=${task.getUser().getId() }&id=${task.getId()}" style="text-decoration: underline;">COMPLETE</a>
+			</c:if>
 			</td>
 	    </tr>
 	    </c:forEach>

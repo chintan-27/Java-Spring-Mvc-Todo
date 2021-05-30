@@ -27,6 +27,7 @@ tr:nth-child(even) {
 }
 </style>
 </head>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -79,18 +80,16 @@ tr:nth-child(even) {
 	    	<td class="text-center"> ${task.getId() }</td>
 			<td class="text-center"> ${task.getTask() } </td>
 			<td class="text-center"> ${task.isCompleted() } </td>
-			<td class="text-center"> <a href="/todoapp/tasks/deletetask?user_id=${task.getUser().getId()}&id=${task.getId() }" style="text-decoration: underline;">DELETE</a>
+			<td class="text-center"> <a href="/todoapp/tasks/deletetask?user_id=${task.getUser().getId()}&id=${task.getId() }" style="text-decoration: underline;"><i class="fas fa-trash" style="font-size:50" ></i></a>
 			<c:if test="${!task.isCompleted()}">
-			<a href="/todoapp/tasks/taskcomplete?user_id=${task.getUser().getId() }&id=${task.getId()}" style="text-decoration: underline;">COMPLETE</a>
+			<a href="/todoapp/tasks/taskcomplete?user_id=${task.getUser().getId() }&id=${task.getId()}" style="text-decoration: underline;"><i class="fas fa-thumbs-up" ></i></a>
 			</c:if>
 			</td>
 	    </tr>
 	    </c:forEach>
 	  </tbody>
 	</table>
-	<form action="/todoapp/tasks/add_task?user_id=${user_id }" method="post">
-	<button type="button" class="btn btn-success">Add Task</button>
-	</form>
+	<a href="/todoapp/tasks/add_task?user_id=${user_id }"><button class="btn btn-success">Add Task</button></a>
 </div>
 </body>
 </html>
